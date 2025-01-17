@@ -8,7 +8,7 @@ use App\Http\Controllers\EbookController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\MealController;
 use App\Http\Controllers\WorkoutController;
-
+use App\Http\Controllers\ArticleController;
 
 
 
@@ -69,7 +69,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // CRUD Endpoints
     Route::get('/workouts', [WorkoutController::class, 'index']);
     Route::post('/workouts', [WorkoutController::class, 'store']);
-    Route::get('/workouts/{id}', [WorkoutController::class, 'show']);
+    Route::get('/workouts/{slug}', [WorkoutController::class, 'show']);
     Route::put('/workouts/{id}', [WorkoutController::class, 'update']);
     Route::delete('/workouts/{id}', [WorkoutController::class, 'destroy']);
 
@@ -77,4 +77,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/workouts/recent', [WorkoutController::class, 'recent']);
     Route::get('/workouts/trending', [WorkoutController::class, 'trending']);
 });
-// Route::post('/ebooks', [EbookController::class, 'store']);
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/articles', [ArticleController::class, 'store']);
+    Route::get('/articles', [ArticleController::class, 'index']);
+    Route::get('/articles/{slug}', [ArticleController::class, 'show']);
+    Route::put('/articles/{id}', [ArticleController::class, 'update']);
+    Route::delete('/articles/{id}', [ArticleController::class, 'destroy']);
+    Route::get('/articles/trending', [ArticleController::class, 'trending']);
+    Route::get('/articles/best', [ArticleController::class, 'best']);
+    Route::get('/articles/recent', [ArticleController::class, 'recent']);
+});
